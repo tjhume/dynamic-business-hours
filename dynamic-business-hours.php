@@ -37,11 +37,28 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'DYNAMIC_BUSINESS_HOURS_VERSION', '1.0.0' );
 
 /**
+ * Plugin name.
+ */
+define( 'DYNAMIC_BUSINESS_HOURS_NAME', 'dynamic-business-hours' );
+
+/**
+ * Plugin directory path.
+ * Use when when requiring/including php files.
+ */
+define( 'DYNAMIC_BUSINESS_HOURS_DIR', plugin_dir_path( __FILE__ ) );
+
+/**
+ * Plugin URL path.
+ * Use for public assets like scripts and styles.
+ */
+define( 'DYNAMIC_BUSINESS_HOURS_URL', plugin_dir_url( __FILE__ ) );
+
+/**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-dynamic-business-hours-activator.php
  */
 function activate_dynamic_business_hours() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dynamic-business-hours-activator.php';
+	require_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours-activator.php';
 	Dynamic_Business_Hours_Activator::activate();
 }
 
@@ -50,7 +67,7 @@ function activate_dynamic_business_hours() {
  * This action is documented in includes/class-dynamic-business-hours-deactivator.php
  */
 function deactivate_dynamic_business_hours() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dynamic-business-hours-deactivator.php';
+	require_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours-deactivator.php';
 	Dynamic_Business_Hours_Deactivator::deactivate();
 }
 
@@ -61,7 +78,7 @@ register_deactivation_hook( __FILE__, 'deactivate_dynamic_business_hours' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-dynamic-business-hours.php';
+require DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours.php';
 
 /**
  * Begins execution of the plugin.

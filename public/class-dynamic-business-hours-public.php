@@ -72,7 +72,7 @@ class Dynamic_Business_Hours_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/dynamic-business-hours-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, DYNAMIC_BUSINESS_HOURS_URL . 'css/dynamic-business-hours-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -95,7 +95,7 @@ class Dynamic_Business_Hours_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/dynamic-business-hours-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, DYNAMIC_BUSINESS_HOURS_URL . 'js/dynamic-business-hours-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

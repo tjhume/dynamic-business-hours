@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage Dynamic_Business_Hours/includes
  * @author     TJ Hume <tristanjhume@gmail.com>
  */
-class Dynamic_Business_Hours_i18n {
+class Dynamic_Business_Hours_I18n {
 
 
 	/**
