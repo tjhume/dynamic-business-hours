@@ -22,9 +22,7 @@
 class Dynamic_Business_Hours_Activator {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	 * Runs when the plugin is activated.
 	 *
 	 * @since    1.0.0
 	 */

@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       Dynamic Business Hours
  * Plugin URI:        https://tjhume.dev/plugins/dynamic-business-hours
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Allows you to display your business hours while accounting for holidays and other special circumstances.
  * Version:           1.0.0
  * Author:            TJ Hume
  * Author URI:        https://tjhume.dev

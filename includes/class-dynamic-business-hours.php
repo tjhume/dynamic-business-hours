@@ -71,7 +71,11 @@ class Dynamic_Business_Hours {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'dynamic-business-hours';
+		if ( defined( 'DYNAMIC_BUSINESS_HOURS_NAME' ) ) {
+			$this->plugin_name = DYNAMIC_BUSINESS_HOURS_NAME;
+		} else {
+			$this->plugin_name = 'dynamic-business-hours';
+		}
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -102,24 +106,24 @@ class Dynamic_Business_Hours {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dynamic-business-hours-loader.php';
+		require_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dynamic-business-hours-i18n.php';
+		require_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dynamic-business-hours-admin.php';
+		require_once DYNAMIC_BUSINESS_HOURS_DIR . 'admin/class-dynamic-business-hours-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-dynamic-business-hours-public.php';
+		require_once DYNAMIC_BUSINESS_HOURS_DIR . 'public/class-dynamic-business-hours-public.php';
 
 		$this->loader = new Dynamic_Business_Hours_Loader();
 

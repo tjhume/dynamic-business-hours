@@ -22,9 +22,7 @@
 class Dynamic_Business_Hours_Deactivator {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	 * Runs when the plugin is deactivated.
 	 *
 	 * @since    1.0.0
 	 */
