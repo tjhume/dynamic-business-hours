@@ -1,8 +1,8 @@
 <?php
 /**
- * Provide a admin area view for the plugin
+ * The Daily Settings admin area
  *
- * This file is used to markup the admin-facing aspects of the plugin.
+ * This file is used to markup the daily settings admin area.
  *
  * @link       https://tjhume.dev
  * @since      1.0.0
@@ -19,9 +19,9 @@
 
 		<?php
 
-		settings_fields( 'dbh-general-settings-options-group' );
+		settings_fields( 'dbh-daily-settings-options-group' );
 
-		do_settings_sections( 'dbh-general-settings' );
+		do_settings_sections( 'dbh-daily-settings' );
 
 		?>
 
