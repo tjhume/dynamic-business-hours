@@ -98,13 +98,27 @@ function run_dynamic_business_hours() {
 run_dynamic_business_hours();
 
 /**
- * Example of using a filter to edit the shortcode display
+ * Example of using a filter to edit the shortcode display.
  *
  * @param string $content The content of the hours display.
  */
 function my_theme_hours_filter( $content ) {
-	$content = str_replace( 'AM', 'Filtered AM', $content );
+	$content = str_replace( 'AM', 'am (filtered)', $content );
 
 	return $content;
 }
 add_filter( 'dbh_hours_content', 'my_theme_hours_filter' );
+
+/**
+ * Another example of user a filter to edit the shortcode display.
+ *
+ * @param string $day The the day in format "Monday" that is being filtered.
+ */
+function my_theme_day_filter( $day ) {
+	if ( 'Monday' === $day ) {
+		$day = 'Mon (filtered)';
+	}
+
+	return $day;
+}
+add_filter( 'dbh_hours_day', 'my_theme_day_filter' );

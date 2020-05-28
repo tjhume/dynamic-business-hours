@@ -48,7 +48,7 @@
 					$today_class = ' class="dbh-current-day"';
 				}
 
-				echo '<li' . esc_attr( $today_class ) . '>' . esc_html( $content ) . '</li>';
+				echo '<li' . esc_attr( $today_class ) . '>' . esc_html( apply_filters( 'dbh_hours_day', $day ) ) . ': ' . esc_html( apply_filters( 'dbh_hours_content', $content ) ) . '</li>';
 			}
 			?>
 		</ul>

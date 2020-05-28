@@ -15,10 +15,9 @@
 
 <div class="wrap dbh-admin daily">
 	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-	<div class="tabs">
-		<a href="?page=dynamic-business-hours">General Settings</a>
-		<a class="active" href="?page=dynamic-business-hours-daily">Daily Settings</a>
-	</div>
+
+	<?php $this->admin_nav(); ?>
+
 	<form method="post" action="options.php">
 
 		<?php

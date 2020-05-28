@@ -60,7 +60,7 @@ class Dynamic_Business_Hours_Utility {
 		}
 		$close_ampm = strtoupper( $close_ampm );
 
-		return apply_filters( 'dbh_hours_content', $open_hour . ':' . $open_minute . ' ' . $open_ampm . ' - ' . $close_hour . ':' . $close_minute . ' ' . $close_ampm );
+		return $open_hour . ':' . $open_minute . ' ' . $open_ampm . ' - ' . $close_hour . ':' . $close_minute . ' ' . $close_ampm;
 	}
 
 	/**

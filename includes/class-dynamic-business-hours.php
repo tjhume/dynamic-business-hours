@@ -195,7 +195,7 @@ class Dynamic_Business_Hours {
 			'dbh-hours',
 			function() {
 				ob_start();
-				include_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/shortcodes/dbh-hours.php';
+				include DYNAMIC_BUSINESS_HOURS_DIR . 'includes/shortcodes/dbh-hours.php';
 				return ob_get_clean();
 			}
 		);

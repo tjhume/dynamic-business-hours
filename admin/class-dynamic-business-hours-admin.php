@@ -85,7 +85,7 @@ class Dynamic_Business_Hours_Admin {
 			'Dynamic Business Hours Settings',
 			'Dynamic Business Hours',
 			'manage_options',
-			'dynamic-business-hours',
+			$this->plugin_name,
 			array( $this, 'admin_page_display' ),
 			'dashicons-clock',
 			60
@@ -93,19 +93,19 @@ class Dynamic_Business_Hours_Admin {
 
 		// Just to rename the first submenu title to General Settings.
 		add_submenu_page(
-			'dynamic-business-hours',
+			$this->plugin_name,
 			'Dynamic Business Hours',
 			'General Settings',
 			'manage_options',
-			'dynamic-business-hours'
+			$this->plugin_name
 		);
 
 		add_submenu_page(
-			'dynamic-business-hours',
+			$this->plugin_name,
 			'Dynamic Business Hours',
 			'Daily Settings',
 			'manage_options',
-			'dynamic-business-hours-daily',
+			$this->plugin_name . '-daily',
 			array( $this, 'daily_settings_display' )
 		);
 	}
@@ -137,6 +137,15 @@ class Dynamic_Business_Hours_Admin {
 		$this->add_settings_sections();
 
 		$this->add_settings_fields();
+	}
+
+	/**
+	 * Echos the admin navigation
+	 *
+	 * @since 1.0.0
+	 */
+	private function admin_nav() {
+		include_once 'partials/dynamic-business-hours-admin-nav.php';
 	}
 
 	/**
