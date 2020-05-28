@@ -81,7 +81,7 @@ class Dynamic_Business_Hours {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
+		$this->register_shortcodes();
 	}
 
 	/**
@@ -113,6 +113,11 @@ class Dynamic_Business_Hours {
 		 * of the plugin.
 		 */
 		require_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours-i18n.php';
+
+		/**
+		 * Class that contains several functions that may be used throughout the plugin
+		 */
+		require_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours-utility.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -161,12 +166,14 @@ class Dynamic_Business_Hours {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_admin_menu' );
-		$this->loader->add_action( 'admin_init', $plugin_admin,  'admin_init' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'admin_init' );
 	}
 
 	/**
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
+	 *
+	 * Currently not in use.
 	 *
 	 * @since    1.0.0
 	 * @access   private
@@ -175,9 +182,23 @@ class Dynamic_Business_Hours {
 
 		$plugin_public = new Dynamic_Business_Hours_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+	}
 
+	/**
+	 * Registers all of the plugin's shortcodes
+	 *
+	 * @since 1.0.0
+	 * @access private
+	 */
+	private function register_shortcodes() {
+		add_shortcode(
+			'dbh-hours',
+			function() {
+				ob_start();
+				include_once DYNAMIC_BUSINESS_HOURS_DIR . 'includes/shortcodes/dbh-hours.php';
+				return ob_get_clean();
+			}
+		);
 	}
 
 	/**

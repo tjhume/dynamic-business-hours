@@ -81,25 +81,6 @@ register_deactivation_hook( __FILE__, 'deactivate_dynamic_business_hours' );
 require DYNAMIC_BUSINESS_HOURS_DIR . 'includes/class-dynamic-business-hours.php';
 
 /**
- * Gets the week as an array with WordPress's starting day as the first day.
- *
- * Defining this function outside classes due to its public and admin-facing usage.
- *
- * @since 1.0.0
- */
-function dbh_get_week() {
-	$start_day = get_option( 'start_of_week' );
-	$week      = array( 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday' );
-
-	for ( $i = $start_day; $i > 0; $i-- ) {
-		$shift_day = $week[0];
-		array_shift( $week );
-		array_push( $week, $shift_day );
-	}
-	return $week;
-}
-
-/**
  * Begins execution of the plugin.
  *
  * Since everything within the plugin is registered via hooks,
@@ -115,3 +96,15 @@ function run_dynamic_business_hours() {
 
 }
 run_dynamic_business_hours();
+
+/**
+ * Example of using a filter to edit the shortcode display
+ *
+ * @param string $content The content of the hours display.
+ */
+function my_theme_hours_filter( $content ) {
+	$content = str_replace( 'AM', 'Filtered AM', $content );
+
+	return $content;
+}
+add_filter( 'dbh_hours_content', 'my_theme_hours_filter' );

@@ -143,6 +143,7 @@ class Dynamic_Business_Hours_Admin {
 	 * Add settings sections.
 	 *
 	 * @since 1.0.0
+	 * @access private
 	 */
 	private function add_settings_sections() {
 		// General Settings.
@@ -169,6 +170,7 @@ class Dynamic_Business_Hours_Admin {
 	 * Add and register settings fields.
 	 *
 	 * @since 1.0.0
+	 * @access private
 	 */
 	private function add_settings_fields() {
 		// General Settings.
@@ -179,7 +181,7 @@ class Dynamic_Business_Hours_Admin {
 		$this->register_time_field( 'dbh_typical_close', 'dbh-general-settings-options-group' );
 
 		// Daily Settings.
-		$week = dbh_get_week();
+		$week = Dynamic_Business_Hours_Utility::get_week();
 		$len  = count( $week );
 		for ( $i = 0; $i < $len; $i++ ) {
 			$day = $week[ $i ];
@@ -209,11 +211,11 @@ class Dynamic_Business_Hours_Admin {
 			);
 			register_setting( 'dbh-daily-settings-options-group', 'dbh_' . lcfirst( $day ) . '_options' );
 
-			$this->add_time_field( 'dbh_' . lcfirst( $day ) . '_typical_open', $day . ' Typical Opening Time', 'dbh-daily-settings', 'dbh-daily-section' );
-			$this->register_time_field( 'dbh_' . lcfirst( $day ) . '_typical_open', 'dbh-daily-settings-options-group' );
+			$this->add_time_field( 'dbh_' . lcfirst( $day ) . '_open', $day . ' Opening Time', 'dbh-daily-settings', 'dbh-daily-section' );
+			$this->register_time_field( 'dbh_' . lcfirst( $day ) . '_open', 'dbh-daily-settings-options-group' );
 
-			$this->add_time_field( 'dbh_' . lcfirst( $day ) . '_typical_close', $day . ' Typical Closing Time', 'dbh-daily-settings', 'dbh-daily-section' );
-			$this->register_time_field( 'dbh_' . lcfirst( $day ) . '_typical_close', 'dbh-daily-settings-options-group' );
+			$this->add_time_field( 'dbh_' . lcfirst( $day ) . '_close', $day . ' Closing Time', 'dbh-daily-settings', 'dbh-daily-section' );
+			$this->register_time_field( 'dbh_' . lcfirst( $day ) . '_close', 'dbh-daily-settings-options-group' );
 		}
 	}
 
@@ -221,6 +223,7 @@ class Dynamic_Business_Hours_Admin {
 	 * Function that makes it easier to add time fields.
 	 *
 	 * @since 1.0.0
+	 * @access private
 	 *
 	 * @param string $field_name       The base of the field name to be used (ex: dbh_typical_open).
 	 * @param string $field_label      The label used by the field.
@@ -255,6 +258,8 @@ class Dynamic_Business_Hours_Admin {
 	 * Function that makes it easer to register/save time fields.
 	 *
 	 * @since 1.0.0
+	 * @access private
+	 *
 	 * @param string $field_name   The name of the field being displayed.
 	 * @param string $option_group The option group where this field is being displayed.
 	 */
@@ -279,6 +284,8 @@ class Dynamic_Business_Hours_Admin {
 	 * Generates hours options in a select.
 	 *
 	 * @since 1.0.0
+	 * @access private
+	 *
 	 * @param string $field The name of the field being generated.
 	 */
 	private function get_select_hours( $field ) {
@@ -306,6 +313,8 @@ class Dynamic_Business_Hours_Admin {
 	 * Generates minute options in a select.
 	 *
 	 * @since 1.0.0
+	 * @access private
+	 *
 	 * @param string $field The name of the field being generated.
 	 */
 	private function get_select_minutes( $field ) {
@@ -334,6 +343,8 @@ class Dynamic_Business_Hours_Admin {
 	 * Generates the AM/PM options in a select.
 	 *
 	 * @since 1.0.0
+	 * @access private
+	 *
 	 * @param string $field The name of the field being generated.
 	 */
 	private function get_select_ampm( $field ) {

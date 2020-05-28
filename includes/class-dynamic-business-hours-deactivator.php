@@ -12,7 +12,7 @@
 /**
  * Fired during plugin deactivation.
  *
- * This class defines all code necessary to run during the plugin's deactivation.
+ * Currently not in use.
  *
  * @since      1.0.0
  * @package    Dynamic_Business_Hours
