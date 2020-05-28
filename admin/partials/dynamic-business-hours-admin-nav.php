@@ -11,6 +11,12 @@
 
 ?>
 
+<?php if ( isset( $_GET['settings-updated'] ) ) { // @codingStandardsIgnoreLine ?>
+		<div id='message' class='updated'>
+		<p><strong><?php esc_html_e( 'Your settings have been updated.' ); ?></strong></p>
+		</div>
+<?php } ?>
+
 <div class="tabs">
 	<?php
 	global $submenu;
