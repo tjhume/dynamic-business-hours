@@ -1,4 +1,32 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+.dbh-admin.general p.submit{
+	border-top: 1px solid rgb(204, 204, 204);
+}
+
+.dbh-admin.general table.form-table,
+.dbh-admin.daily table.form-table tr:nth-child(3n){
+	border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.dbh-admin .tabs{
+    margin-top: 10px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+.dbh-admin .tabs a{
+    display: inline-block;
+    border-left: 1px solid rgb(204, 204, 204);
+    border-right: 1px solid rgb(204, 204, 204);
+    border-top: 1px solid rgb(204, 204, 204);
+    color: #23282d;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: -1px;
+}
+
+.dbh-admin .tabs a.active{
+    background-color: #F1F1F1;
+}

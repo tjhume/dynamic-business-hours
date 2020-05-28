@@ -13,8 +13,12 @@
 
 ?>
 
-<div class="wrap">
+<div class="wrap dbh-admin general">
 	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+	<div class="tabs">
+		<a class="active" href="?page=dynamic-business-hours">General Settings</a>
+		<a href="?page=dynamic-business-hours-daily">Daily Settings</a>
+	</div>
 	<form method="post" action="options.php">
 
 		<?php

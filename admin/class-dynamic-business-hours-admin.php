@@ -60,19 +60,7 @@ class Dynamic_Business_Hours_Admin {
 	 */
 	public function enqueue_styles() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Dynamic_Business_Hours_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Dynamic_Business_Hours_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_style( $this->plugin_name, DYNAMIC_BUSINESS_HOURS_URL . 'css/dynamic-business-hours-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, DYNAMIC_BUSINESS_HOURS_URL . 'admin/css/dynamic-business-hours-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -83,19 +71,7 @@ class Dynamic_Business_Hours_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Dynamic_Business_Hours_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Dynamic_Business_Hours_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, DYNAMIC_BUSINESS_HOURS_URL . 'js/dynamic-business-hours-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, DYNAMIC_BUSINESS_HOURS_URL . 'admin/js/dynamic-business-hours-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
@@ -169,7 +145,8 @@ class Dynamic_Business_Hours_Admin {
 	 * @since 1.0.0
 	 */
 	private function add_settings_sections() {
-		add_settings_section( 'dbh-general-section', 'General Settings', '', 'dbh-general-settings' );
+		// General Settings.
+		add_settings_section( 'dbh-general-section', '', '', 'dbh-general-settings' );
 
 		add_settings_section(
 			'dbh-usage-section',
@@ -183,6 +160,9 @@ class Dynamic_Business_Hours_Admin {
 			},
 			'dbh-general-settings'
 		);
+
+		// Daily Settings.
+		add_settings_section( 'dbh-daily-section', '', '', 'dbh-daily-settings' );
 	}
 
 	/**
@@ -199,7 +179,42 @@ class Dynamic_Business_Hours_Admin {
 		$this->register_time_field( 'dbh_typical_close', 'dbh-general-settings-options-group' );
 
 		// Daily Settings.
-		$week = db_get_week();
+		$week = dbh_get_week();
+		$len  = count( $week );
+		for ( $i = 0; $i < $len; $i++ ) {
+			$day = $week[ $i ];
+
+			add_settings_field(
+				'dbh_' . lcfirst( $day ) . '_options',
+				$day . ' Options',
+				function( $arg ) use ( $day ) {
+					$day      = lcfirst( $day );
+					$selected = get_option( 'dbh_' . lcfirst( $day ) . '_options' );
+					if ( 'typical_times' !== $selected && 'closed' !== $selected && 'different_times' !== $selected ) {
+						$selected = 'typical_times';
+					}
+
+					echo '
+						<td>
+						<fieldset class="radios" data-day="' . esc_attr( $day ) . '">
+							<label for="' . esc_attr( $day ) . '-typical-times"><input class="typical-times" value="typical_times" type="radio" id="' . esc_attr( $day ) . '-typical-times" name="dbh_' . esc_attr( $day ) . '_options" ' . checked( 'typical_times', $selected, false ) . '>Use typical times</label><br>
+							<label for="' . esc_attr( $day ) . '-closed"><input class="closed" value="closed" type="radio" id="' . esc_attr( $day ) . '-closed" name="dbh_' . esc_attr( $day ) . '_options" ' . checked( 'closed', $selected, false ) . '>Closed</label><br>
+							<label for="' . esc_attr( $day ) . '-different-times"><input class="different-times" value="different_times" type="radio" id="' . esc_attr( $day ) . '-different-times" name="dbh_' . esc_attr( $day ) . '_options" ' . checked( 'different_times', $selected, false ) . '>Use different times</label>
+						</fieldset>
+					</td>
+					';
+				},
+				'dbh-daily-settings',
+				'dbh-daily-section'
+			);
+			register_setting( 'dbh-daily-settings-options-group', 'dbh_' . lcfirst( $day ) . '_options' );
+
+			$this->add_time_field( 'dbh_' . lcfirst( $day ) . '_typical_open', $day . ' Typical Opening Time', 'dbh-daily-settings', 'dbh-daily-section' );
+			$this->register_time_field( 'dbh_' . lcfirst( $day ) . '_typical_open', 'dbh-daily-settings-options-group' );
+
+			$this->add_time_field( 'dbh_' . lcfirst( $day ) . '_typical_close', $day . ' Typical Closing Time', 'dbh-daily-settings', 'dbh-daily-section' );
+			$this->register_time_field( 'dbh_' . lcfirst( $day ) . '_typical_close', 'dbh-daily-settings-options-group' );
+		}
 	}
 
 	/**
@@ -217,7 +232,7 @@ class Dynamic_Business_Hours_Admin {
 			$field_name,
 			$field_label,
 			function( $arg ) use ( $field_name ) {
-				echo '<td>
+				echo '<td class="' . esc_attr( $field_name ) . '">
 				<select name="' . esc_attr( $field_name ) . '_hour" id="' . esc_attr( $field_name ) . '_hour">' .
 					$this->get_select_hours( $field_name . '_hour') // @codingStandardsIgnoreLine
 				. '</select>
