@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       Dynamic Business Hours
  * Plugin URI:        https://tjhume.dev/plugins/dynamic-business-hours
- * Description:       Allows you to display your business hours while accounting for holidays and other special circumstances.
+ * Description:       A simple and easy way to display the office hours for your business
  * Version:           1.0.0
  * Author:            TJ Hume
  * Author URI:        https://tjhume.dev
@@ -30,9 +30,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Current plugin version.
  */
 define( 'DYNAMIC_BUSINESS_HOURS_VERSION', '1.0.0' );
 
@@ -96,29 +94,3 @@ function run_dynamic_business_hours() {
 
 }
 run_dynamic_business_hours();
-
-/**
- * Example of using a filter to edit the shortcode display.
- *
- * @param string $content The content of the hours display.
- */
-function my_theme_hours_filter( $content ) {
-	$content = str_replace( 'AM', 'am (filtered)', $content );
-
-	return $content;
-}
-add_filter( 'dbh_hours_content', 'my_theme_hours_filter' );
-
-/**
- * Another example of user a filter to edit the shortcode display.
- *
- * @param string $day The the day in format "Monday" that is being filtered.
- */
-function my_theme_day_filter( $day ) {
-	if ( 'Monday' === $day ) {
-		$day = 'Mon (filtered)';
-	}
-
-	return $day;
-}
-add_filter( 'dbh_hours_day', 'my_theme_day_filter' );
